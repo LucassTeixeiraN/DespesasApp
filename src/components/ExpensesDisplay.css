@@ -1,0 +1,144 @@
+.expenses-container {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+}
+
+.expenses-display {
+    background-color: #1EA52B;
+    margin-top: 70px;
+    width: 70%;
+    height: 520px;
+    border-radius: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.users-expenses {
+    margin-left: 30px;
+    width: 45%;
+    display: grid;
+}
+
+.money-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.currently-expenses {
+    font-size: 50px;
+    color: white;
+}
+
+.limit {
+    font: 30px;
+    color: rgb(203, 203, 203);
+}
+
+#display-bar {
+    --bar-color: -407px 0 0 400px #00590f;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    appearance: none; 
+    width: 80%;
+    outline: none;
+    overflow: hidden;
+    border-radius: 16px;
+    pointer-events:none;
+    justify-self: center;
+    background-color: #ccc;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    height: 5px;
+    /* background: #ccc; */
+    border-radius: 16px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none; 
+    height: 0px;
+    width: 30px;
+    box-shadow: var(--bar-color);
+}
+
+.expenses-display-options-container {
+    display: grid;
+    justify-items: end;
+    align-self: flex-start;
+}
+
+.options-icon {
+    fill: white;
+    transition: 0.1s;
+    margin: 10px 5px 0 0;
+    cursor: pointer;
+}
+
+.options-icon:hover {
+    fill: #00590f;
+}
+
+
+.optionsContainer {
+    background-color: rgb(207, 207, 207);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 18px;
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+    box-shadow: 0 5px 10px 10px rgba(0, 0, 0, 0.179);
+}
+
+.optionsContainer span {
+    width: 100%;
+    height: 1px;
+    background-color: var(--secondary-color);
+}
+
+.option {
+    width: 300px;
+    height: 50px;
+    display: grid;
+    align-items: center;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: rgb(190, 188, 188);
+}
+
+.option:first-child:hover {
+    border-radius: 10px 10px 0 0;
+}
+
+.option:last-child:hover {
+    border-radius: 0 0 10px 10px;
+}
+
+.options-close-btn {
+    justify-self: flex-end;
+    margin-right: -105px;
+    margin-top: -18px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.options-close-btn svg {
+    fill: rgb(106, 99, 99);
+}
+
+.options-close-btn:hover  svg{
+    fill: var(--main-color);
+}
