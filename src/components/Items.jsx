@@ -6,16 +6,16 @@ import { Item } from "./Item";
 
 export function Items(props) {
 
-    const { numberOfExpenses, buttonPressed, setButtonPressed, setTotalExpenses, totalExpenses } = props;
+    const { numberOfExpenses, setNumberOfExpenses, buttonPressed, setButtonPressed, setTotalExpenses, totalExpenses, itemId, setItemId } = props;
     const [expenses, setExpenses] = useState([]);
 
     return (
         <>
             <div className="items">
                 {numberOfExpenses === 0 && <h3 className="noitems">Nenhuma despesa</h3>}
-                {expenses.length > 0 && <Item expenses={expenses} totalExpenses = { totalExpenses } setTotalExpenses = { setTotalExpenses }/>}
+                {expenses.length > 0 && <Item expenses={expenses} totalExpenses = { totalExpenses } setTotalExpenses = { setTotalExpenses } numberOfExpenses = { numberOfExpenses } setNumberOfExpenses = { setNumberOfExpenses }/>}
             </div>
-            {buttonPressed === true && <NewItem itemId={numberOfExpenses} setButtonPressed={setButtonPressed} expenses={expenses} setExpenses={setExpenses} setTotalExpenses = { setTotalExpenses } totalExpenses = { totalExpenses }/>}
+            {buttonPressed === true && <NewItem itemId={ itemId } setItemId = { setItemId } setButtonPressed={setButtonPressed} expenses={expenses} setExpenses={setExpenses} setTotalExpenses = { setTotalExpenses } numberOfExpenses = { numberOfExpenses } setNumberOfExpenses = { setNumberOfExpenses } totalExpenses = { totalExpenses }/>}
         </>
     );
 }
