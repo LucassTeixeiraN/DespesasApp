@@ -4,6 +4,7 @@ import { Items } from "./Items";
 
 function Expenses( props ) {
     const [numberOfExpenses, setNumberOfExpenses] = useState(0)
+    const [itemId, setItemId] = useState(0)
     const [buttonPressed, setButtonPressed] = useState(false) 
 
     const { setTotalExpenses, totalExpenses } = props
@@ -13,12 +14,8 @@ function Expenses( props ) {
             <div className="expenses">
                 <span className="stroke"></span>
 
-                <button className="add-btn" onClick={() => {
-                    setNumberOfExpenses(numberOfExpenses + 1)
-                    setButtonPressed(true)
-                    
-                    }}>Adicionar</button>
-                <Items buttonPressed = { buttonPressed } setButtonPressed = { setButtonPressed } numberOfExpenses = { numberOfExpenses } setNumberOfExpenses = { setNumberOfExpenses } setTotalExpenses = { setTotalExpenses } totalExpenses = { totalExpenses }/>
+                <button className="add-btn" onClick={() => {setButtonPressed(true)}}>Adicionar</button>
+                <Items buttonPressed = { buttonPressed } setButtonPressed = { setButtonPressed } numberOfExpenses = { numberOfExpenses } setNumberOfExpenses = { setNumberOfExpenses } itemId = { itemId } setItemId = { setItemId } setTotalExpenses = { setTotalExpenses } totalExpenses = { totalExpenses }/>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import "./Expenses.css"
 
@@ -40,40 +40,51 @@ function ChangeExpense( props ) {
 
 
 export function Item(props) {
-    const { expenses, totalExpenses, setTotalExpenses } = props;
+    const { expenses, totalExpenses, setTotalExpenses, numberOfExpenses, setNumberOfExpenses } = props;
     
     const [changeExpenseDisplay, setChangeExpenseDisplay] = useState(false)
     const [currentItem, setCurrentItem] = useState()
+    const [expenseLengthHandle, setExpenseLengthHandle] = useState()
+    
+    useEffect(() => {
+        setExpenseLengthHandle(expenses.length)
+    }, [expenses])
 
-    function deleteItem(index) {
-        console.log(expenses.indexOf(expenses[index]));
-        setTotalExpenses(totalExpenses - parseFloat(expenses[index].cost))
-        expenses.splice(expenses.indexOf(expenses[index]), 1)
+    function deleteItem(item) {
+        for(var i = 0; i < expenseLengthHandle; i++) {
+            if(expenses[i].id === item) {
+                setTotalExpenses(totalExpenses - parseFloat(expenses[i].cost))
+                expenses.splice(i, 1)
 
+                setNumberOfExpenses(numberOfExpenses - 1)
+            }
+        }
     }
+    
+
+        const item = expenses.map((el) => <div key={el.id} id = {el.id} className="expense-item">
+        <div className="item">
+            <div className="content-container">
+                <p>R${parseFloat(el.cost).toFixed(2)}</p>
+                <div></div>
+                <p>{el.itemName}</p>
+            </div>
+            <div className="buttons-container">
+                <div className="edit-btn" onClick={() => {setChangeExpenseDisplay(true); setCurrentItem(el.id)}}><IconContext.Provider value={{ size: "25px" }}><IoMdCreate></IoMdCreate></IconContext.Provider></div>
+                <div className="delete-btn" onClick={() => {
+                    deleteItem(el.id)
+
+                    console.log(expenses)
+                }}><IconContext.Provider value={{ size: "25px" }}><IoMdTrash></IoMdTrash></IconContext.Provider></div>
+            </div>
+        </div>
+        <div className="hl"></div>
+    </div>)
 
     return (
-
+        
         <div className="item-container" id = "item-container">
-            {expenses.map((el) => <div key={el.id} id = {el.id} className="expense-item">
-                <div className="item">
-                    <div className="content-container">
-                        <p>R${parseFloat(el.cost).toFixed(2)}</p>
-                        <div></div>
-                        <p>{el.itemName}</p>
-                    </div>
-                    <div className="buttons-container">
-                        <div className="edit-btn" onClick={() => {setChangeExpenseDisplay(true); setCurrentItem(el.id)}}><IconContext.Provider value={{ size: "25px" }}><IoMdCreate></IoMdCreate></IconContext.Provider></div>
-                        <div className="delete-btn" onClick={() => {
-                            deleteItem(el.id - 1)
-
-                            console.log(expenses)
-                        }}><IconContext.Provider value={{ size: "25px" }}><IoMdTrash></IoMdTrash></IconContext.Provider></div>
-                    </div>
-                </div>
-                <button onClick={() => console.log(expenses)}>a</button>
-                <div className="hl"></div>
-            </div>)}
+            {item}
             {changeExpenseDisplay && <ChangeExpense expenses = { expenses } setChangeExpenseDisplay = { setChangeExpenseDisplay } currentItem = { currentItem } totalExpenses = { totalExpenses } setTotalExpenses = { setTotalExpenses }/>}
         </div>
     );

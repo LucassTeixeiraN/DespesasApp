@@ -71,6 +71,7 @@ function ExpensesDisplay( props ) {
         
 
         if(displayBar === 0) {
+            document.getElementById("expenses-display").style.backgroundColor = "#1EA52B"
             document.getElementById("display-bar").style.setProperty("--bar-color", "-407px 0 0 400px #ccc")
             document.getElementById("display-bar").style.backgroundColor = "#ccc"
         } else if(displayBar <= 50 ) {

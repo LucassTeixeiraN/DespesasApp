@@ -6,7 +6,7 @@ import { IoIosClose } from "react-icons/io";
 
 export function NewItem(props) {
 
-    const { itemId, setButtonPressed, expenses, setExpenses, setTotalExpenses, totalExpenses } = props;
+    const { itemId, setItemId, setButtonPressed, expenses, setExpenses, setTotalExpenses, totalExpenses, numberOfExpenses, setNumberOfExpenses } = props;
 
     const [inpCost, setInpCost] = useState();
     const [inpItemName, setInpItemName] = useState();
@@ -32,6 +32,9 @@ export function NewItem(props) {
 
                         setTotalExpenses(totalExpenses + parseFloat(inpCost))
                         setExpenses([...expenses, { id: itemId, cost: inpCost, itemName: inpItemName }]);
+
+                        setItemId(itemId + 1)
+                        setNumberOfExpenses(numberOfExpenses + 1)
                     }}>Adicionar</button>
             </div>
         </div>
