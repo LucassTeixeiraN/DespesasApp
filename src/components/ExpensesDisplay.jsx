@@ -2,7 +2,7 @@ import "./ExpensesDisplay.css"
 import { CiMenuKebab } from "react-icons/ci";
 import { IconContext } from "react-icons";
 import { IoIosClose } from "react-icons/io";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function ChangeLimit( props ) {
     
@@ -53,6 +53,21 @@ function AddExpense( props ) {
 }
 
 
+function useOutsideClick(ref, optionChange) {
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if(ref.current && !ref.current.contains(event.target)) {
+                optionChange(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [ref])
+}
+
 function ExpensesDisplay( props ) {
 
     const [displayOptions, setDisplayOptions] = useState(false)
@@ -92,13 +107,14 @@ function ExpensesDisplay( props ) {
             document.getElementById("display-bar").style.setProperty("--bar-color", "-407px 0 0 400px #ae2716")
             document.getElementById("expenses-display").style.backgroundColor = "#e32d15"
         }
-
-
     })
+
+    const wrapperRef = useRef(null)
+    useOutsideClick(wrapperRef, setDisplayOptions)
 
     return(
         <div className="expenses-container" >
-            <div className="expenses-display" id = "expenses-display">
+            <div className="expenses-display" id="expenses-display">
                 <div className="users-expenses">
                     <div className="money-display">
                         <h1 className="currently-expenses">R$ {totalExpenses.toFixed(2)}</h1>
@@ -107,12 +123,17 @@ function ExpensesDisplay( props ) {
                     <input id="display-bar" className="display-bar" type="range" min="0" value={displayBar} ></input>
                 </div>
                 <div className="expenses-display-options-container">
-                    <div onClick={() => {(!displayOptions) ? setDisplayOptions(true) : setDisplayOptions(false)}}>
+                    {(!displayOptions) ? <button id="option-button" onClick={() => {if(!displayOptions) {setDisplayOptions(true)}}}>
                         <IconContext.Provider value={{ className: "options-icon", size: "30px", }}>
                             <CiMenuKebab />
                         </IconContext.Provider>
-                    </div>
-                    {displayOptions && <div className="optionsContainer">
+                    </button> : <button id="option-button" onClick={() => {if(!displayOptions) {setDisplayOptions(true)}}} disabled>
+                        <IconContext.Provider value={{ className: "options-icon", size: "30px", }}>
+                            <CiMenuKebab />
+                        </IconContext.Provider>
+                    </button>}
+
+                    {displayOptions && <div className="optionsContainer" ref={wrapperRef}>
                         <div className="option" onClick={() => {setChangeLimitDisplay(true); setDisplayOptions(false)}}><p>Mudar limite</p></div>
                         <span></span> 
                         <div className="option" onClick={() => {setAddExpenseDisplay(true); setDisplayOptions(false)}}><p>Adicionar valor de despesa</p></div>

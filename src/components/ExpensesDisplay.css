@@ -76,6 +76,17 @@ input[type=range]::-webkit-slider-thumb {
     align-self: flex-start;
 }
 
+
+#option-button {
+    background-color: transparent;
+    border: none;
+}
+
+#option-button:disabled:hover .options-icon{
+    fill: white;
+    cursor: default;
+}
+
 .options-icon {
     fill: white;
     transition: 0.1s;
@@ -141,4 +152,47 @@ input[type=range]::-webkit-slider-thumb {
 
 .options-close-btn:hover  svg{
     fill: var(--main-color);
+}
+
+@media screen and (max-width: 2560px) {
+    .expenses-display {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .currently-expenses{
+        font-size: 35px
+    }
+
+    .limit {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .money-display {
+        flex-direction: column;
+        width: 100%;
+    }
+    .currently-expenses{
+        font-size: 30px
+    }
+
+    .limit {
+        font-size: 15px;
+    }
+    .display-bar {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .currently-expenses{
+        font-size: 20px
+    }
+
+    .limit {
+        font-size: 15px;
+    }
 }
