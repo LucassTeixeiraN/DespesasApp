@@ -26,12 +26,14 @@ export function NewItem(props) {
                 </div>
                 <button className="confirm-btn"
                     onClick={() => {
-                        setInpCost(document.getElementById("inp-cost").value);
-                        setInpItemName(document.getElementById("inp-item-name").value);
                         setButtonPressed(false);
-
-                        setTotalExpenses(totalExpenses + parseFloat(inpCost))
-                        setExpenses([...expenses, { id: itemId, cost: inpCost, itemName: inpItemName }]);
+                        if(inpCost === undefined || inpCost === '') {
+                            setTotalExpenses(totalExpenses + 0)
+                            setExpenses([...expenses, { id: itemId, cost: 0, itemName: inpItemName }]);
+                        } else {
+                            setTotalExpenses(totalExpenses + parseFloat(inpCost))
+                            setExpenses([...expenses, { id: itemId, cost: inpCost, itemName: inpItemName }]);
+                        }
 
                         setItemId(itemId + 1)
                         setNumberOfExpenses(numberOfExpenses + 1)

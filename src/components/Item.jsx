@@ -19,8 +19,13 @@ function ChangeExpense( props ) {
     function editItem(item) {
         for(var i = 0; i < expenseLengthHandle; i++) {
             if(expenses[i].id === item) {
-                setTotalExpenses(totalExpenses - expenses[i].cost + parseFloat(newCostHandle))
-                expenses[i].cost = newCostHandle
+                if(newCostHandle === undefined || newCostHandle === ""){
+                    setTotalExpenses(totalExpenses - expenses[i].cost + 0)
+                    expenses[i].cost = 0
+                } else {
+                    setTotalExpenses(totalExpenses - expenses[i].cost + parseFloat(newCostHandle))
+                    expenses[i].cost = newCostHandle
+                }
                 expenses[i].itemName = newNameHandle
                 setChangeExpenseDisplay(false)
 
